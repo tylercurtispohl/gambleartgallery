@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import classNames from "classnames";
-import Link from "next/link";
+import { Providers } from "./providers";
+import { Nav } from "./ui/nav";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,28 +21,10 @@ export default function RootLayout({
   return (
     <html lang="en" className="light">
       <body className={inter.className}>
-        <div className="hidden py-4 sm:flex sm:justify-around">
-          <div className="flex w-11/12 md:w-3/4 xl:w-3/5 xl:flex-wrap text-blue-900 font-serif">
-            <div className="flex-grow xl:w-full xl:text-center xl:h-10 font-medium text-xl tracking-wider">
-              <Link href="/">Kirsten Gamble</Link>
-            </div>
-            <div className="flex justify-center xl:w-full tracking-wide">
-              <div className="px-5">
-                <Link href="/">Gallery</Link>
-              </div>
-              <div className="px-5">
-                <Link href="/about">About</Link>
-              </div>
-              <div className="px-5">
-                <Link href="/events">Events</Link>
-              </div>
-              <div className="px-5">
-                <Link href="/contact">Contact</Link>
-              </div>
-            </div>
-          </div>
-        </div>
-        {children}
+        <Providers>
+          <Nav></Nav>
+          {children}
+        </Providers>
       </body>
     </html>
   );
