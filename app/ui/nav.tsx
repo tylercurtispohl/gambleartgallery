@@ -21,7 +21,11 @@ export const Nav = () => {
   const pathname = usePathname();
 
   return (
-    <Navbar shouldHideOnScroll onMenuOpenChange={setIsMenuOpen}>
+    <Navbar
+      shouldHideOnScroll
+      onMenuOpenChange={setIsMenuOpen}
+      isBlurred={false}
+    >
       <NavbarBrand>
         <p className="font-medium font-serif text-2xl text-blue-900">
           Kirsten Gamble
