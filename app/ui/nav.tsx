@@ -25,6 +25,10 @@ export const Nav = () => {
       shouldHideOnScroll
       onMenuOpenChange={setIsMenuOpen}
       isBlurred={false}
+      maxWidth="xl"
+      classNames={{
+        wrapper: "px-4 md:px-6 xl:px-0",
+      }}
     >
       <NavbarBrand>
         <p className="font-medium font-serif text-2xl text-blue-900">

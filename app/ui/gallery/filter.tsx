@@ -49,7 +49,7 @@ export const Filter = (props: { categories: CategoryT[] }) => {
 
   return (
     <div className="w-full flex justify-center">
-      <div className="flex justify-end w-full xl:w-5/6 py-2 px-6 lg:px-2 max-w-[1024px] lg:max-w-none">
+      <div className="flex justify-end w-full py-2">
         <Popover
           placement="bottom-end"
           isOpen={isPopoverOpen}

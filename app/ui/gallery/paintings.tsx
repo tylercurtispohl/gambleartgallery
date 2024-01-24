@@ -1,15 +1,10 @@
 "use client";
 
-import { PaintingT, configuredSanityClient } from "@/app/lib/data";
-import { ReactNode, useCallback, useState } from "react";
-import Image from "next/image";
+import { PaintingT } from "@/app/lib/data";
+import { useCallback, useState } from "react";
 import { Painting } from "./painting";
 import { PaintingOverlay } from "./paintingOverlay";
-import {
-  ImageUrlBuilder,
-  UseNextSanityImageBuilderOptions,
-  useNextSanityImage,
-} from "next-sanity-image";
+import { usePaintingImageMap } from "./usePaintingImageMap";
 
 const getBuckets = (paintings: PaintingT[], numBuckets: number) => {
   const buckets: PaintingT[][] = [];
@@ -32,54 +27,6 @@ const getBuckets = (paintings: PaintingT[], numBuckets: number) => {
   return buckets;
 };
 
-const myCustomImageBuilder = (
-  imageUrlBuilder: ImageUrlBuilder,
-  options: UseNextSanityImageBuilderOptions
-) => {
-  return imageUrlBuilder
-    .width(
-      options.width || Math.min(options.originalImageDimensions.width, 800)
-    )
-    .quality(70)
-    .fit("clip");
-};
-
-const PaintingImage = ({
-  name,
-  asset,
-}: {
-  name: string;
-  asset: { _ref: string };
-}) => {
-  const imageProps = useNextSanityImage(configuredSanityClient, asset, {
-    imageBuilder: myCustomImageBuilder,
-  });
-
-  return (
-    <Image
-      {...imageProps}
-      alt={name}
-      width="0"
-      height="0"
-      sizes="(max-width: 640px) 60vw, (max-width: 1280px) 40vw, 10vw"
-      className="w-full h-full object-contain"
-    />
-  );
-};
-
-const usePaintingImageMap = (paintings: PaintingT[]) => {
-  return new Map<string, ReactNode>(
-    paintings.map((p) => [
-      p._id,
-      <PaintingImage
-        key={`painting_image_${p._id}`}
-        name={p.name}
-        asset={p.image.asset}
-      />,
-    ])
-  );
-};
-
 export const Paintings = (props: { paintings: PaintingT[] }) => {
   const { paintings } = props;
   const fourBuckets = getBuckets(paintings, 4);
@@ -89,12 +36,6 @@ export const Paintings = (props: { paintings: PaintingT[] }) => {
   const [expandedPainting, setExpandedPainting] = useState<
     PaintingT | null | undefined
   >();
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const [currentExpandedPaintingId, setCurrentExpandedPaintingId] = useState<
-    string | null
-  >(null);
 
   const goToPrevPainting = useCallback(() => {
     if (!expandedPainting) return;
@@ -138,7 +79,7 @@ export const Paintings = (props: { paintings: PaintingT[] }) => {
           {paintingImageMap.get(expandedPainting._id)}
         </PaintingOverlay>
       )}
-      <div className="w-full xl:w-5/6">
+      <div className="w-full">
         {/* Four columns on large screens */}
         <div className="hidden lg:grid grid-cols-4 gap-2">
           {fourBuckets.map((bucket, bucketIndex) => (
@@ -153,7 +94,6 @@ export const Paintings = (props: { paintings: PaintingT[] }) => {
                   className=""
                   onClick={() => {
                     setExpandedPainting(p);
-                    setIsModalOpen(true);
                     document.body.classList.add("overflow-hidden");
                   }}
                 >
@@ -177,7 +117,6 @@ export const Paintings = (props: { paintings: PaintingT[] }) => {
                   className=""
                   onClick={() => {
                     setExpandedPainting(p);
-                    setIsModalOpen(true);
                     document.body.classList.add("overflow-hidden");
                   }}
                 >
@@ -188,7 +127,7 @@ export const Paintings = (props: { paintings: PaintingT[] }) => {
           ))}
         </div>
         {/* Two columns on small screens and one column on extra small screens */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 md:hidden px-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 md:hidden">
           {twoBuckets.map((bucket, bucketIndex) => (
             <div
               key={`painting_bucket_${bucketIndex}`}
@@ -201,7 +140,6 @@ export const Paintings = (props: { paintings: PaintingT[] }) => {
                   className=""
                   onClick={() => {
                     setExpandedPainting(p);
-                    setIsModalOpen(true);
                     document.body.classList.add("overflow-hidden");
                   }}
                 >
