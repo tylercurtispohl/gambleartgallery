@@ -126,8 +126,8 @@ export const Paintings = (props: { paintings: PaintingT[] }) => {
             </div>
           ))}
         </div>
-        {/* Two columns on small screens and one column on extra small screens */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 md:hidden">
+        {/* Two columns on small screens */}
+        <div className="sm:grid hidden sm:grid-cols-2 gap-2 md:hidden">
           {twoBuckets.map((bucket, bucketIndex) => (
             <div
               key={`painting_bucket_${bucketIndex}`}
@@ -147,6 +147,22 @@ export const Paintings = (props: { paintings: PaintingT[] }) => {
                 </Painting>
               ))}
             </div>
+          ))}
+        </div>
+        {/* One column on extra small screens */}
+        <div className="flex flex-col gap-4 sm:hidden">
+          {paintings.map((p) => (
+            <Painting
+              key={`painting_${p._id}`}
+              painting={p}
+              className=""
+              onClick={() => {
+                setExpandedPainting(p);
+                document.body.classList.add("overflow-hidden");
+              }}
+            >
+              {paintingImageMap.get(p._id)}
+            </Painting>
           ))}
         </div>
       </div>
