@@ -1,13 +1,7 @@
 "use client";
 
 import { PaintingT, configuredSanityClient } from "@/app/lib/data";
-import { Painting } from "@/app/ui/gallery/painting";
 import { ReactNode, useCallback, useState } from "react";
-import { PaintingOverlay } from "./paintingOverlay";
-import { PaintingModal } from "@/app/ui/gallery/paintingModal";
-import { NewPaintingOverlay } from "@/app/ui/gallery/newPaintingOverlay";
-import imageUrlBuilder from "@sanity/image-url";
-import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import Image from "next/image";
 import { PaintingV2 } from "./paintingV2";
 import { PaintingOverlayV3 } from "./paintingOverlayV3";
@@ -16,12 +10,6 @@ import {
   UseNextSanityImageBuilderOptions,
   useNextSanityImage,
 } from "next-sanity-image";
-
-const builder = imageUrlBuilder(configuredSanityClient);
-
-function urlFor(source: SanityImageSource) {
-  return builder.image(source);
-}
 
 const getBuckets = (paintings: PaintingT[], numBuckets: number) => {
   const buckets: PaintingT[][] = [];
