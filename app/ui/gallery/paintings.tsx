@@ -71,7 +71,6 @@ export const Paintings = (props: { paintings: PaintingT[] }) => {
           goToNextPainting={goToNextPainting}
           goToPrevPainting={goToPrevPainting}
           onOverlayClose={() => {
-            console.log("onOverlayClose function called");
             setExpandedPainting(null);
             document.body.classList.remove("overflow-hidden");
           }}
