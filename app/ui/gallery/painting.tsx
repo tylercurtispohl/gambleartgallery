@@ -1,6 +1,3 @@
-"use client";
-
-import Image from "next/image";
 import { PaintingT, configuredSanityClient } from "@/app/lib/data";
 import { useNextSanityImage } from "next-sanity-image";
 import { clsx } from "clsx";
