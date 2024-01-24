@@ -1,13 +1,12 @@
 "use client";
 
-import { PaintingT, configuredSanityClient } from "@/app/lib/data";
+import { PaintingT } from "@/app/lib/data";
 import { useSwipeable } from "react-swipeable";
 import {
   ChevronLeftIcon,
   ChevronRightIcon,
   XMarkIcon,
 } from "@heroicons/react/24/solid";
-import { Button } from "@nextui-org/react";
 
 export const PaintingOverlay = ({
   painting,
@@ -33,17 +32,25 @@ export const PaintingOverlay = ({
       <div className="grid grid-rows-9 h-full w-full lg:w-11/12 2xl:w-4/5 3xl:w-3/4 4xl:w-3/5 6xl:w-1/2 md:px-2 py-2">
         <div className="row-span-1 grid grid-cols-6">
           <div className="flex flex-col justify-around col-start-6 col-span-1">
-            <Button variant="light" size="lg" onPress={onOverlayClose}>
+            <button
+              className="p-2 text-2xl opacity-75 cursor-pointer sm:p-6 md:p-5 hover:bg-opacity-30 hover:bg-gray-500 hover:rounded-3xl flex justify-center "
+              onClick={onOverlayClose}
+            >
               <XMarkIcon className="h-12 w-12 text-white" />
-            </Button>
+            </button>
           </div>
         </div>
         <div className="row-span-7" {...handlers}>
           <div className="grid grid-cols-6 h-full">
             <div className="hidden md:flex md:flex-col md:justify-around col-span-1">
-              <Button variant="light" size="lg" onPress={goToPrevPainting}>
+              <button
+                className="text-2xl opacity-75 cursor-pointer lg:p-5 xl:px-10 xl:py-16 hover:bg-opacity-30 hover:bg-gray-500 hover:rounded-3xl flex justify-center "
+                onClick={() => {
+                  goToPrevPainting();
+                }}
+              >
                 <ChevronLeftIcon className="h-12 w-12 text-white" />
-              </Button>
+              </button>
             </div>
             <div className="col-span-6 md:col-span-4 flex justify-center">
               <div className="relative">
@@ -52,9 +59,14 @@ export const PaintingOverlay = ({
               </div>
             </div>
             <div className="hidden md:flex md:flex-col md:justify-around col-span-1">
-              <Button variant="light" size="lg" onPress={goToNextPainting}>
+              <button
+                className="text-2xl opacity-75 cursor-pointer hover:bg-opacity-30 hover:bg-gray-500 hover:rounded-3xl flex justify-center lg:p-5 xl:px-10 xl:py-16"
+                onClick={() => {
+                  goToNextPainting();
+                }}
+              >
                 <ChevronRightIcon className="h-12 w-12 text-white" />
-              </Button>
+              </button>
             </div>
           </div>
         </div>
