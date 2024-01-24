@@ -3,8 +3,8 @@
 import { PaintingT, configuredSanityClient } from "@/app/lib/data";
 import { ReactNode, useCallback, useState } from "react";
 import Image from "next/image";
-import { PaintingV2 } from "./paintingV2";
-import { PaintingOverlayV3 } from "./paintingOverlayV3";
+import { Painting } from "./painting";
+import { PaintingOverlay } from "./paintingOverlay";
 import {
   ImageUrlBuilder,
   UseNextSanityImageBuilderOptions,
@@ -58,8 +58,6 @@ const PaintingImage = ({
   return (
     <Image
       {...imageProps}
-      // width={300}
-      // height={300}
       alt={name}
       width="0"
       height="0"
@@ -100,18 +98,10 @@ export const Paintings = (props: { paintings: PaintingT[] }) => {
 
   const goToPrevPainting = useCallback(() => {
     if (!expandedPainting) return;
-    // const index = paintings.findIndex(
-    //   (p) => p._id === currentExpandedPaintingId
-    // );
+
     const index = paintings.findIndex((p) => p._id === expandedPainting._id);
 
     if (index !== null && typeof index !== "undefined") {
-      // const newId =
-      //   index === 0
-      //     ? paintings[paintings.length - 1]._id
-      //     : paintings[index - 1]._id;
-
-      // setCurrentExpandedPaintingId(newId);
       const prevPainting =
         index === 0 ? paintings[paintings.length - 1] : paintings[index - 1];
       setExpandedPainting(prevPainting);
@@ -121,18 +111,9 @@ export const Paintings = (props: { paintings: PaintingT[] }) => {
   const goToNextPainting = useCallback(() => {
     if (!expandedPainting) return;
 
-    // const index = paintings.findIndex(
-    //   (p) => p._id === currentExpandedPaintingId
-    // );
     const index = paintings.findIndex((p) => p._id === expandedPainting._id);
 
     if (index !== null && typeof index !== "undefined") {
-      // const newId =
-      //   index === paintings.length - 1
-      //     ? paintings[0]._id
-      //     : paintings[index + 1]._id;
-
-      // setCurrentExpandedPaintingId(newId);
       const nextPainting =
         index === paintings.length - 1 ? paintings[0] : paintings[index + 1];
       setExpandedPainting(nextPainting);
@@ -144,7 +125,7 @@ export const Paintings = (props: { paintings: PaintingT[] }) => {
   return (
     <>
       {expandedPainting && (
-        <PaintingOverlayV3
+        <PaintingOverlay
           painting={expandedPainting}
           goToNextPainting={goToNextPainting}
           goToPrevPainting={goToPrevPainting}
@@ -155,7 +136,7 @@ export const Paintings = (props: { paintings: PaintingT[] }) => {
           }}
         >
           {paintingImageMap.get(expandedPainting._id)}
-        </PaintingOverlayV3>
+        </PaintingOverlay>
       )}
       <div className="w-full xl:w-5/6">
         {/* Four columns on large screens */}
@@ -166,7 +147,7 @@ export const Paintings = (props: { paintings: PaintingT[] }) => {
               className="flex flex-col gap-2"
             >
               {bucket.map((p) => (
-                <PaintingV2
+                <Painting
                   key={`painting_${p._id}`}
                   painting={p}
                   className=""
@@ -177,7 +158,7 @@ export const Paintings = (props: { paintings: PaintingT[] }) => {
                   }}
                 >
                   {paintingImageMap.get(p._id)}
-                </PaintingV2>
+                </Painting>
               ))}
             </div>
           ))}
@@ -190,7 +171,7 @@ export const Paintings = (props: { paintings: PaintingT[] }) => {
               className="flex flex-col gap-2"
             >
               {bucket.map((p) => (
-                <PaintingV2
+                <Painting
                   key={`painting_${p._id}`}
                   painting={p}
                   className=""
@@ -201,7 +182,7 @@ export const Paintings = (props: { paintings: PaintingT[] }) => {
                   }}
                 >
                   {paintingImageMap.get(p._id)}
-                </PaintingV2>
+                </Painting>
               ))}
             </div>
           ))}
@@ -214,7 +195,7 @@ export const Paintings = (props: { paintings: PaintingT[] }) => {
               className="flex flex-col gap-4"
             >
               {bucket.map((p) => (
-                <PaintingV2
+                <Painting
                   key={`painting_${p._id}`}
                   painting={p}
                   className=""
@@ -225,7 +206,7 @@ export const Paintings = (props: { paintings: PaintingT[] }) => {
                   }}
                 >
                   {paintingImageMap.get(p._id)}
-                </PaintingV2>
+                </Painting>
               ))}
             </div>
           ))}

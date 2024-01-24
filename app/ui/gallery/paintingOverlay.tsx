@@ -9,7 +9,7 @@ import {
 } from "@heroicons/react/24/solid";
 import { Button } from "@nextui-org/react";
 
-export const PaintingOverlayV3 = ({
+export const PaintingOverlay = ({
   painting,
   children,
   goToPrevPainting,

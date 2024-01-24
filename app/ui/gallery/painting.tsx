@@ -7,7 +7,7 @@ import { clsx } from "clsx";
 import { ArrowsPointingOutIcon } from "@heroicons/react/24/solid";
 import { ReactNode } from "react";
 
-export const PaintingV2 = ({
+export const Painting = ({
   painting,
   children,
   className,
