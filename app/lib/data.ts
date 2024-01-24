@@ -1,5 +1,4 @@
 import { createClient } from "@sanity/client";
-import { unstable_noStore } from "next/cache";
 
 export type PaintingT = {
   name: string;
@@ -18,6 +17,7 @@ export type PaintingT = {
     _ref: string;
   };
   _createdAt: Date;
+  isSold: boolean;
 };
 
 export type CategoryT = {
