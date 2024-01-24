@@ -1,13 +1,13 @@
 "use client";
 
-import { PaintingT } from "@/app/lib/data";
+import { SanityPainting } from "@/app/lib/types";
 import { useCallback, useState } from "react";
 import { Painting } from "./painting";
 import { PaintingOverlay } from "./paintingOverlay";
 import { usePaintingImageMap } from "./usePaintingImageMap";
 
-const getBuckets = (paintings: PaintingT[], numBuckets: number) => {
-  const buckets: PaintingT[][] = [];
+const getBuckets = (paintings: SanityPainting[], numBuckets: number) => {
+  const buckets: SanityPainting[][] = [];
 
   for (let i = 0; i < numBuckets; i++) {
     buckets[i] = [];
@@ -27,14 +27,14 @@ const getBuckets = (paintings: PaintingT[], numBuckets: number) => {
   return buckets;
 };
 
-export const Paintings = (props: { paintings: PaintingT[] }) => {
+export const Paintings = (props: { paintings: SanityPainting[] }) => {
   const { paintings } = props;
   const fourBuckets = getBuckets(paintings, 4);
   const threeBuckets = getBuckets(paintings, 3);
   const twoBuckets = getBuckets(paintings, 2);
 
   const [expandedPainting, setExpandedPainting] = useState<
-    PaintingT | null | undefined
+    SanityPainting | null | undefined
   >();
 
   const goToPrevPainting = useCallback(() => {

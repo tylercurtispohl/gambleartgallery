@@ -1,5 +1,4 @@
-import { PaintingT, configuredSanityClient } from "@/app/lib/data";
-import { useNextSanityImage } from "next-sanity-image";
+import { SanityPainting } from "@/app/lib/types";
 import { clsx } from "clsx";
 import { ArrowsPointingOutIcon } from "@heroicons/react/24/solid";
 import { ReactNode } from "react";
@@ -10,13 +9,11 @@ export const Painting = ({
   className,
   onClick,
 }: {
-  painting: PaintingT;
+  painting: SanityPainting;
   children: ReactNode;
   className?: string;
   onClick?: () => void;
 }) => {
-  const imageProps = useNextSanityImage(configuredSanityClient, painting.image);
-
   return (
     <div
       className={clsx(

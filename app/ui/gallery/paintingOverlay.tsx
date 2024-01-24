@@ -1,6 +1,6 @@
 "use client";
 
-import { PaintingT } from "@/app/lib/data";
+import { SanityPainting } from "@/app/lib/data";
 import { useSwipeable } from "react-swipeable";
 import {
   ChevronLeftIcon,
@@ -15,7 +15,7 @@ export const PaintingOverlay = ({
   goToNextPainting,
   onOverlayClose,
 }: {
-  painting: PaintingT;
+  painting: SanityPainting;
   children: React.ReactNode;
   goToPrevPainting: () => void;
   goToNextPainting: () => void;

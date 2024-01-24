@@ -1,4 +1,4 @@
-import { PaintingT, configuredSanityClient } from "@/app/lib/data";
+import { configuredSanityClient } from "@/app/lib/data";
 import { ReactNode } from "react";
 import Image from "next/image";
 import {
@@ -6,6 +6,7 @@ import {
   UseNextSanityImageBuilderOptions,
   useNextSanityImage,
 } from "next-sanity-image";
+import { SanityPainting, SanityRef } from "@/app/lib/types";
 
 const myCustomImageBuilder = (
   imageUrlBuilder: ImageUrlBuilder,
@@ -19,13 +20,7 @@ const myCustomImageBuilder = (
     .fit("clip");
 };
 
-const PaintingImage = ({
-  name,
-  asset,
-}: {
-  name: string;
-  asset: { _ref: string };
-}) => {
+const PaintingImage = ({ name, asset }: { name: string; asset: SanityRef }) => {
   const imageProps = useNextSanityImage(configuredSanityClient, asset, {
     imageBuilder: myCustomImageBuilder,
   });
@@ -45,7 +40,7 @@ const PaintingImage = ({
   );
 };
 
-export const usePaintingImageMap = (paintings: PaintingT[]) => {
+export const usePaintingImageMap = (paintings: SanityPainting[]) => {
   return new Map<string, ReactNode>(
     paintings.map((p) => [
       p._id,

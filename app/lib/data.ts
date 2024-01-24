@@ -1,29 +1,9 @@
 import { createClient } from "@sanity/client";
-
-export type PaintingT = {
-  name: string;
-  _updateAt: Date;
-  height: number;
-  image: {
-    asset: {
-      _ref: string;
-    };
-  };
-  price: number;
-  sortOrder: number;
-  width: number;
-  _id: string;
-  category: {
-    _ref: string;
-  };
-  _createdAt: Date;
-  isSold: boolean;
-};
-
-export type CategoryT = {
-  _id: string;
-  name: string;
-};
+import {
+  SanityAboutContent,
+  SanityCategory,
+  SanityPainting,
+} from "@/app/lib/types";
 
 export const configuredSanityClient = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
@@ -34,21 +14,31 @@ export const configuredSanityClient = createClient({
 
 export const fetchPaintings = async (
   categoryId?: string | undefined
-): Promise<PaintingT[]> => {
+): Promise<SanityPainting[]> => {
   const categoryQuery = categoryId
     ? ` && category._ref == "${categoryId}"`
     : "";
   const query = `*[_type == "painting"${categoryQuery}]`;
 
-  const paintings = (await configuredSanityClient.fetch(query)) as PaintingT[];
+  const paintings = (await configuredSanityClient.fetch(
+    query
+  )) as SanityPainting[];
 
   return paintings;
 };
 
-export const fetchCategories = async (): Promise<CategoryT[]> => {
+export const fetchCategories = async (): Promise<SanityCategory[]> => {
   const categories = await configuredSanityClient.fetch(
     `*[_type == "category"]`
   );
 
-  return categories as CategoryT[];
+  return categories as SanityCategory[];
+};
+
+export const fetchAboutPageContent = async (): Promise<SanityAboutContent> => {
+  const query = `*[_type == "about"]`;
+  const docs = await configuredSanityClient.fetch(query);
+
+  // This is returned as an array but there should only ever be one item
+  return docs[0] as SanityAboutContent;
 };

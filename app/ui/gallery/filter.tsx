@@ -1,6 +1,6 @@
 "use client";
 
-import { CategoryT } from "@/app/lib/data";
+import { SanityCategory } from "@/app/lib/types";
 import { FunnelIcon } from "@heroicons/react/24/solid";
 import {
   Button,
@@ -14,7 +14,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
 
-export const Filter = (props: { categories: CategoryT[] }) => {
+export const Filter = (props: { categories: SanityCategory[] }) => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
