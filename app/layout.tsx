@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import classNames from "classnames";
 import { Providers } from "./providers";
 import { Nav } from "./ui/nav";
 
@@ -23,7 +22,11 @@ export default function RootLayout({
       <body className={inter.className}>
         <Providers>
           <Nav></Nav>
-          {children}
+          <main className="flex justify-center">
+            <div className="flex justify-center flex-wrap w-full lg:w-11/12 2xl:w-4/5 3xl:w-3/4 4xl:w-3/5 6xl:w-1/2 md:px-2">
+              {children}
+            </div>
+          </main>
         </Providers>
       </body>
     </html>
