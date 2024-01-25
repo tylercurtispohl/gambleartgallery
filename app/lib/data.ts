@@ -21,18 +21,40 @@ export const fetchPaintings = async (
     : "";
   const query = `*[_type == "painting"${categoryQuery}]`;
 
-  return await configuredSanityClient.fetch<SanityPainting[]>(query);
+  return await configuredSanityClient.fetch<SanityPainting[]>(
+    query,
+    {},
+    {
+      next: {
+        tags: ["painting"],
+      },
+    }
+  );
 };
 
 export const fetchCategories = async (): Promise<SanityCategory[]> => {
   return await configuredSanityClient.fetch<SanityCategory[]>(
-    `*[_type == "category"]`
+    `*[_type == "category"]`,
+    {},
+    {
+      next: {
+        tags: ["category"],
+      },
+    }
   );
 };
 
 export const fetchAboutPageContent = async (): Promise<SanityAboutContent> => {
   const query = `*[_type == "about"]`;
-  const docs = await configuredSanityClient.fetch<SanityAboutContent[]>(query);
+  const docs = await configuredSanityClient.fetch<SanityAboutContent[]>(
+    query,
+    {},
+    {
+      next: {
+        tags: ["about"],
+      },
+    }
+  );
 
   // This is returned as an array but there should only ever be one item
   return docs[0];
@@ -40,6 +62,12 @@ export const fetchAboutPageContent = async (): Promise<SanityAboutContent> => {
 
 export const fetchEvents = async (): Promise<SanityEvent[]> => {
   return await configuredSanityClient.fetch<SanityEvent[]>(
-    `*[_type == "event"]`
+    `*[_type == "event"]`,
+    {},
+    {
+      next: {
+        tags: ["event"],
+      },
+    }
   );
 };
