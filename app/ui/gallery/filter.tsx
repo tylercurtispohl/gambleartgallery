@@ -20,11 +20,9 @@ export const Filter = (props: { categories: SanityCategory[] }) => {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
   const { categories } = props;
-  const currentCategoryId = searchParams.get("categoryId") ?? undefined;
+  const currentCategoryId = searchParams.get("categoryId") ?? "";
 
-  const [filterValue, setFilterValue] = useState<string | undefined>(
-    currentCategoryId
-  );
+  const [filterValue, setFilterValue] = useState<string>(currentCategoryId);
 
   const navigateToFilter = useDebouncedCallback((value: string | undefined) => {
     const params = new URLSearchParams(searchParams);
@@ -41,7 +39,7 @@ export const Filter = (props: { categories: SanityCategory[] }) => {
     setIsPopoverOpen(false);
   }, 300);
 
-  const handleFilterValueChange = (value: string | undefined) => {
+  const handleFilterValueChange = (value: string) => {
     setFilterValue(value);
     navigateToFilter(value);
   };
@@ -59,11 +57,10 @@ export const Filter = (props: { categories: SanityCategory[] }) => {
           </PopoverTrigger>
           <PopoverContent>
             <RadioGroup
-              label="Filter Paintings"
-              color="primary"
               value={filterValue}
               onValueChange={handleFilterValueChange}
             >
+              {/* <p className="text-blue-900 text-md">Filter Paintings</p> */}
               <Radio key="category_all" value="">
                 All
               </Radio>
