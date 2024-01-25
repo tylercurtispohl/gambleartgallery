@@ -30,9 +30,11 @@ export const Nav = () => {
       }}
     >
       <NavbarBrand>
-        <p className="font-medium font-serif text-2xl text-blue-900">
-          Kirsten Gamble
-        </p>
+        <Link color="foreground" href="/">
+          <p className="font-medium font-serif text-2xl text-blue-900">
+            Kirsten Gamble
+          </p>
+        </Link>
       </NavbarBrand>
       <NavbarContent className="hidden sm:flex gap-4" justify="end">
         <NavbarItem>
