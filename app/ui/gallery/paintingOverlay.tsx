@@ -1,6 +1,6 @@
 "use client";
 
-import { SanityPainting } from "@/app/lib/data";
+import { SanityPainting } from "@/app/lib/types";
 import { useSwipeable } from "react-swipeable";
 import {
   ChevronLeftIcon,
