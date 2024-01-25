@@ -3,7 +3,6 @@
 import { SanityCategory } from "@/app/lib/types";
 import { FunnelIcon } from "@heroicons/react/24/solid";
 import {
-  Button,
   Popover,
   PopoverContent,
   PopoverTrigger,

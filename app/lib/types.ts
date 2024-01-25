@@ -1,6 +1,5 @@
 export type SanityPainting = {
   name: string;
-  _updateAt: Date;
   height: number;
   image: SanityImage;
   price: number;
@@ -10,7 +9,6 @@ export type SanityPainting = {
   category: {
     _ref: string;
   };
-  _createdAt: Date;
   isSold: boolean;
 };
 
@@ -30,4 +28,13 @@ export type SanityImage = {
 export type SanityAboutContent = {
   bio: string;
   image: SanityImage;
+};
+
+export type SanityEvent = {
+  _id: string;
+  name: string;
+  location: string;
+  date: string;
+  description: string;
+  link: string;
 };

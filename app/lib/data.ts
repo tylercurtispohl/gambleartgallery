@@ -2,6 +2,7 @@ import { createClient } from "@sanity/client";
 import {
   SanityAboutContent,
   SanityCategory,
+  SanityEvent,
   SanityPainting,
 } from "@/app/lib/types";
 
@@ -20,25 +21,25 @@ export const fetchPaintings = async (
     : "";
   const query = `*[_type == "painting"${categoryQuery}]`;
 
-  const paintings = (await configuredSanityClient.fetch(
-    query
-  )) as SanityPainting[];
-
-  return paintings;
+  return await configuredSanityClient.fetch<SanityPainting[]>(query);
 };
 
 export const fetchCategories = async (): Promise<SanityCategory[]> => {
-  const categories = await configuredSanityClient.fetch(
+  return await configuredSanityClient.fetch<SanityCategory[]>(
     `*[_type == "category"]`
   );
-
-  return categories as SanityCategory[];
 };
 
 export const fetchAboutPageContent = async (): Promise<SanityAboutContent> => {
   const query = `*[_type == "about"]`;
-  const docs = await configuredSanityClient.fetch(query);
+  const docs = await configuredSanityClient.fetch<SanityAboutContent[]>(query);
 
   // This is returned as an array but there should only ever be one item
-  return docs[0] as SanityAboutContent;
+  return docs[0];
+};
+
+export const fetchEvents = async (): Promise<SanityEvent[]> => {
+  return await configuredSanityClient.fetch<SanityEvent[]>(
+    `*[_type == "event"]`
+  );
 };
