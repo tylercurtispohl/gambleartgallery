@@ -37,7 +37,7 @@ export const Filter = (props: { categories: SanityCategory[] }) => {
     }
 
     setIsPopoverOpen(false);
-  }, 300);
+  }, 100);
 
   const handleFilterValueChange = (value: string) => {
     setFilterValue(value);
@@ -51,6 +51,10 @@ export const Filter = (props: { categories: SanityCategory[] }) => {
           placement="bottom-end"
           isOpen={isPopoverOpen}
           onOpenChange={setIsPopoverOpen}
+          size="lg"
+          classNames={{
+            content: "p-6",
+          }}
         >
           <PopoverTrigger>
             <FunnelIcon className="cursor-pointer h-6 w-6 text-blue-900" />
