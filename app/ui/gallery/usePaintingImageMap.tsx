@@ -16,7 +16,7 @@ const myCustomImageBuilder = (
     .width(
       options.width || Math.min(options.originalImageDimensions.width, 800)
     )
-    .quality(70)
+    .quality(80)
     .fit("clip");
 };
 
