@@ -8,13 +8,13 @@ export default async function Page() {
       {events.length ? (
         <>
           {events.map((e) => (
-            <div key={`event_${e._id}`}>
+            <div key={`event_${e._id}`} className="text-center">
               <h1 className="text-xl">{e.name}</h1>
               <p className="mt-2">{e.location}</p>
               <p>{e.date}</p>
-              <p className="mt-2">{e.description}</p>
+              <p className="mt-2 text-justify">{e.description}</p>
               {e.link && (
-                <p className="mt-2 underline">
+                <p className="mt-2 underline underline-offset-2">
                   <a href={e.link} target="_blank">
                     Click here for more info
                   </a>
@@ -25,7 +25,7 @@ export default async function Page() {
         </>
       ) : (
         <div>
-          <h1>No upcoming events</h1>
+          <h1 className="text-xl">No upcoming events</h1>
         </div>
       )}
     </div>

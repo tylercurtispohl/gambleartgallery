@@ -11,7 +11,7 @@ export default async function Page() {
         <AboutImage asset={aboutPageContent.image.asset} />
       </div>
       <div className="text-blue-900 tracking-wide ">
-        <p>{aboutPageContent.bio}</p>
+        <p className="text-justify">{aboutPageContent.bio}</p>
         <p className="mt-6 lg:mt-4 mb:6 text-center lg:text-left">
           To purchase art please <br className="lg:hidden" />
           <Link href="/contact" className="underline">
