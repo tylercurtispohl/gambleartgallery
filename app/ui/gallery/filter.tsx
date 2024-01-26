@@ -1,29 +1,22 @@
 "use client";
 
 import { SanityCategory } from "@/app/lib/types";
-import { FunnelIcon } from "@heroicons/react/24/solid";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-  Radio,
-  RadioGroup,
-} from "@nextui-org/react";
+import { Select, SelectItem } from "@nextui-org/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
+import { Selection } from "@react-types/shared";
 
 export const Filter = (props: { categories: SanityCategory[] }) => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
-  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
-
   const { categories } = props;
   const currentCategoryId = searchParams.get("categoryId") ?? "";
 
-  const [filterValue, setFilterValue] = useState<string>(currentCategoryId);
-
+  const [filterValue, setFilterValue] = useState<Selection>(
+    new Set([`category_${currentCategoryId}`])
+  );
   const navigateToFilter = useDebouncedCallback((value: string | undefined) => {
     const params = new URLSearchParams(searchParams);
 
@@ -35,48 +28,34 @@ export const Filter = (props: { categories: SanityCategory[] }) => {
       params.delete("categoryId");
       replace(pathname);
     }
-
-    setIsPopoverOpen(false);
   }, 100);
 
-  const handleFilterValueChange = (value: string) => {
-    setFilterValue(value);
-    navigateToFilter(value);
+  const handleSelectionChange = (keys: Selection) => {
+    setFilterValue(keys);
+
+    const selectedCategory =
+      typeof keys === "object"
+        ? keys.values().next().value.replace("category_", "")
+        : "";
+
+    navigateToFilter(selectedCategory);
   };
 
   return (
-    <div className="w-full flex justify-center">
-      <div className="flex justify-end w-full py-2">
-        <Popover
-          placement="bottom-end"
-          isOpen={isPopoverOpen}
-          onOpenChange={setIsPopoverOpen}
-          size="lg"
-          classNames={{
-            content: "p-6",
-          }}
-        >
-          <PopoverTrigger>
-            <FunnelIcon className="cursor-pointer h-6 w-6 text-blue-900" />
-          </PopoverTrigger>
-          <PopoverContent>
-            <RadioGroup
-              value={filterValue}
-              onValueChange={handleFilterValueChange}
-            >
-              {/* <p className="text-blue-900 text-md">Filter Paintings</p> */}
-              <Radio key="category_all" value="">
-                All
-              </Radio>
-              {categories.map((c) => (
-                <Radio key={`category_${c._id}`} value={`${c._id}`}>
-                  {c.name}
-                </Radio>
-              ))}
-            </RadioGroup>
-          </PopoverContent>
-        </Popover>
-      </div>
+    <div className="w-full grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 py-2">
+      <Select
+        label="Filter"
+        size="sm"
+        className="col-span-1 md:col-start-3 lg:col-start-4"
+        onSelectionChange={handleSelectionChange}
+        selectedKeys={filterValue}
+      >
+        {[{ _id: "", name: "All" }, ...categories].map((c) => (
+          <SelectItem key={`category_${c._id}`} value={c._id}>
+            {c.name}
+          </SelectItem>
+        ))}
+      </Select>
     </div>
   );
 };
