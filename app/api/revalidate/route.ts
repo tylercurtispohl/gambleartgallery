@@ -6,6 +6,8 @@ import { parseBody } from "next-sanity/webhook";
 
 export const runtime = "edge";
 
+const env = process.env.NODE_ENV;
+
 // Mostly copied from this blog post:
 // https://www.rudderstack.com/blog/implementing-the-tag-revalidation-caching-strategy-with-nextjs-and-sanity/
 export async function POST(req: NextRequest) {
@@ -14,7 +16,7 @@ export async function POST(req: NextRequest) {
       BodyInit & { _type: string }
     >(req as unknown as NextApiRequest, process.env.SANITY_REVALIDATE_SECRET);
 
-    if (!isValidSignature) {
+    if (env === "production" && !isValidSignature) {
       const message = "Invalid signature";
       return new Response(JSON.stringify({ message, isValidSignature, body }), {
         status: 401,
