@@ -34,7 +34,7 @@ const PaintingImage = ({ name, asset }: { name: string; asset: SanityRef }) => {
       alt={name}
       width="0"
       height="0"
-      sizes="(max-width: 640px) 60vw, (max-width: 1280px) 40vw, 10vw"
+      sizes="(max-width: 640px) 60vw, (max-width: 1280px) 40vw, 20vw"
       className="w-full h-full object-contain"
     />
   );
