@@ -72,10 +72,8 @@ export const PaintingOverlay = ({
         </div>
         <div className="row-span-2 text-white text-center">
           <p className="text-base tracking-wider lg:text-lg">{painting.name}</p>
-          {painting.width && painting.height && (
-            <p className="text-sm lg:text-base">
-              {painting.width} x {painting.height}
-            </p>
+          {painting.size && (
+            <p className="text-sm lg:text-base">{painting.size}</p>
           )}
           {!painting.isSold && painting.price && (
             <p className="text-sm lg:text-base">${painting.price}</p>

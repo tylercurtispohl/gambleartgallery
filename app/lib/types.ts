@@ -1,15 +1,14 @@
 export type SanityPainting = {
   name: string;
-  height: number;
   image: SanityImage;
   price: number;
   sortOrder: number;
-  width: number;
   _id: string;
   category: {
     _ref: string;
   };
   isSold: boolean;
+  size?: string;
 };
 
 export type SanityCategory = {

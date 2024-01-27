@@ -14,6 +14,7 @@ export const Painting = ({
   className?: string;
   onClick?: () => void;
 }) => {
+  console.log(painting);
   return (
     <div
       className={clsx(
@@ -40,10 +41,8 @@ export const Painting = ({
         <div className="mt-auto leading-5 text-center break-words">
           {painting.name}
         </div>
-        {painting.width && painting.height && (
-          <div className="leading-5 text-center">
-            {painting.width} x {painting.height}
-          </div>
+        {painting.size && (
+          <div className="leading-5 text-center">{painting.size}</div>
         )}
         {!painting.isSold && painting.price && (
           <div className="leading-5 text-center">${painting.price}</div>
