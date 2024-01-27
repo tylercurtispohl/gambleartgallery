@@ -1,14 +1,12 @@
 export type SanityPainting = {
-  name: string;
-  image: SanityImage;
-  price: number;
-  sortOrder: number;
   _id: string;
-  category: {
-    _ref: string;
-  };
+  category: SanityRef;
+  image: SanityImage;
   isSold: boolean;
+  name: string;
+  price: number;
   size?: string;
+  sortOrder: number;
 };
 
 export type SanityCategory = {
@@ -31,9 +29,9 @@ export type SanityAboutContent = {
 
 export type SanityEvent = {
   _id: string;
-  name: string;
-  location: string;
   date: string;
   description: string;
   link: string;
+  location: string;
+  name: string;
 };
