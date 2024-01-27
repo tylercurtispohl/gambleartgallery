@@ -14,7 +14,6 @@ export const Painting = ({
   className?: string;
   onClick?: () => void;
 }) => {
-  console.log(painting);
   return (
     <div
       className={clsx(
