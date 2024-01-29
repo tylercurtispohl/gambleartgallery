@@ -5,6 +5,7 @@ import {
   SanityEvent,
   SanityPainting,
 } from "@/app/lib/types";
+import { sortBy } from "lodash";
 
 export const configuredSanityClient = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
@@ -21,7 +22,7 @@ export const fetchPaintings = async (
     : "";
   const query = `*[_type == "painting"${categoryQuery}]`;
 
-  return await configuredSanityClient.fetch<SanityPainting[]>(
+  const paintings = await configuredSanityClient.fetch<SanityPainting[]>(
     query,
     {},
     {
@@ -30,6 +31,10 @@ export const fetchPaintings = async (
       },
     }
   );
+
+  const sortedPaintings = sortBy(paintings, (p) => p.sortOrder);
+
+  return sortedPaintings;
 };
 
 export const fetchCategories = async (): Promise<SanityCategory[]> => {
