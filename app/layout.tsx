@@ -24,7 +24,7 @@ export default function RootLayout({
         <Providers>
           <Nav></Nav>
           <main className="flex justify-center">
-            <div className="flex justify-center flex-wrap w-full max-w-[1280px] px-4 md:px-6 xl:px-0">
+            <div className="flex justify-center flex-wrap w-full max-w-[1280px] px-4 md:px-6 xl:px-0 pb-4">
               {children}
             </div>
           </main>
