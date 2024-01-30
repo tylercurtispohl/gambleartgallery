@@ -43,9 +43,11 @@ export const Painting = ({
         {painting.size && (
           <div className="leading-5 text-center">{painting.size}</div>
         )}
-        {!painting.isSold && painting.price && (
-          <div className="leading-5 text-center">${painting.price}</div>
-        )}
+        {!painting.isSold &&
+          painting.price !== null &&
+          typeof painting.price !== "undefined" && (
+            <div className="leading-5 text-center">${painting.price}</div>
+          )}
         {painting.isSold && <div className="leading-5 text-center">SOLD</div>}
       </div>
     </div>
