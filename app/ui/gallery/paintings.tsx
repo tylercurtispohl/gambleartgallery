@@ -6,6 +6,7 @@ import { Painting } from "./painting";
 import { PaintingOverlay } from "./paintingOverlay";
 import { usePaintingImageMap } from "./usePaintingImageMap";
 
+// Split the list of paintings into "buckets" or columns
 const getBuckets = (paintings: SanityPainting[], numBuckets: number) => {
   const buckets: SanityPainting[][] = [];
 
@@ -29,6 +30,8 @@ const getBuckets = (paintings: SanityPainting[], numBuckets: number) => {
 
 export const Paintings = (props: { paintings: SanityPainting[] }) => {
   const { paintings } = props;
+
+  // Organize the paintings for different screen configurations
   const fourBuckets = getBuckets(paintings, 4);
   const threeBuckets = getBuckets(paintings, 3);
   const twoBuckets = getBuckets(paintings, 2);
